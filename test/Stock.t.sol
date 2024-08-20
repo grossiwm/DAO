@@ -8,10 +8,11 @@ contract StockTest is Test {
     Stock public stock;
     string public constant NAME = "testName";
     string public constant SYMBOL = "TESTSYMBOL";
+    uint256 public constant CLAIM_PERIOD = 30 days;
 
 
     function setUp() public {
-        stock = new Stock(NAME, SYMBOL, 1000000);
+        stock = new Stock(NAME, SYMBOL, 1000000, CLAIM_PERIOD);
     }
 
     function test_InitialBalance() public view {
