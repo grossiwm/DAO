@@ -6,9 +6,12 @@ import {Stock} from "../src/Stock.sol";
 
 contract StockTest is Test {
     Stock public stock;
+    string public constant NAME = "testName";
+    string public constant SYMBOL = "TESTSYMBOL";
+
 
     function setUp() public {
-        stock = new Stock("testName", "TESTSYMBOL", 1000000);
+        stock = new Stock(NAME, SYMBOL, 1000000);
     }
 
     function test_InitialBalance() public view {
@@ -17,6 +20,16 @@ contract StockTest is Test {
         uint balance = stock.balanceOf(testAddress);
 
         assertEq(balance, 1000000);
+    }
+
+    function test_Name() public view {
+
+        assertEq(stock.name(), NAME);
+    }
+
+    function test_Symbol() public view {
+
+        assertEq(stock.symbol(), SYMBOL);
     }
 
 }
