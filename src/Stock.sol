@@ -10,13 +10,13 @@ contract Stock is ERC20 {
 
     uint256 public dividendsPerToken;
     uint256 public lastDividendTime;
-    uint256 public claimPeriod;
+    uint256 public shareDistributionPeriod;
     uint256 public dividendCycle;
     address[] public shareholders;
 
-    constructor(string memory _name, string memory _symbol, uint256 _initialSupply, uint256 _claimPeriod) ERC20(_name, _symbol) {
+    constructor(string memory _name, string memory _symbol, uint256 _initialSupply, uint256 _shareDistributionPeriod) ERC20(_name, _symbol) {
         _mint(msg.sender, _initialSupply);
-        claimPeriod = _claimPeriod;
+        shareDistributionPeriod = _shareDistributionPeriod;
         dividendCycle = 1;
     }
 
@@ -27,6 +27,9 @@ contract Stock is ERC20 {
     }
 
     function depositDividends() public payable {
+        require(block.timestamp >= lastDividendTime, "Share distribution period has not started yet");
+        require(block.timestamp <= lastDividendTime + shareDistributionPeriod, "Claim period is over");
+
         require(totalSupply() > 0, "No tokens in circulation");
         require(msg.value > 0, "No ether sent");
 

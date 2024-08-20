@@ -8,7 +8,7 @@ contract StockTest is Test {
     Stock public stock;
     string public constant NAME = "testName";
     string public constant SYMBOL = "TESTSYMBOL";
-    uint256 public constant CLAIM_PERIOD = 30 days;
+    uint256 public constant SHARE_DISTRIBUTION_PERIOD = 30 days;
 
 
     function setUp() public {
