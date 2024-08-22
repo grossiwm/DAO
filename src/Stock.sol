@@ -28,7 +28,7 @@ contract Stock is ERC20 {
 
     function depositDividends() public payable {
         require(block.timestamp >= lastDividendTime, "Share distribution period has not started yet");
-        require(block.timestamp <= lastDividendTime + shareDistributionPeriod, "Claim period is over");
+        require(block.timestamp <= lastDividendTime + shareDistributionPeriod, "Share distribution period is over");
 
         require(totalSupply() > 0, "No tokens in circulation");
         require(msg.value > 0, "No ether sent");
